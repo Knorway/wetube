@@ -1,0 +1,11 @@
+extends ./layouts/main
+
+block content
+    .form-container
+        form(action=`/users${routes.editProfile}` method='post')
+            div.fileUpload
+                label(for="") Avatar
+                input(type="file" id='avatar', name='avatar')
+            input(type="text" placehoder='Name' name='name')
+            input(type="email" placehoder='Email' name='email')
+            input(type="submit" value='Update Profile')
