@@ -13,6 +13,10 @@ const CommentSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Video',
 	},
+	creator: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User',
+	},
 });
 
 const Model = mongoose.model('Comment', CommentSchema);

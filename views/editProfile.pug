@@ -2,10 +2,10 @@ extends ./layouts/main
 
 block content
     .form-container
-        form(action=`/users${routes.editProfile}` method='post')
+        form(action=`/users${routes.editProfile}` method='post' enctype='multipart/form-data')
             div.fileUpload
-                label(for="") Avatar
-                input(type="file" id='avatar', name='avatar')
-            input(type="text" placehoder='Name' name='name')
-            input(type="email" placehoder='Email' name='email')
+                label(for="avatar") Avatar
+                input(type="file" id='avatar', name='avatar' accept='image/*')
+            input(type="text" placehoder='Name' name='name' value=loggedUser.name)
+            input(type="email" placehoder='Email' name='email' value=loggedUser.email)
             input(type="submit" value='Update Profile')
