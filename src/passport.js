@@ -18,7 +18,7 @@ passport.use(
 		{
 			clientID: process.env.GH_ID,
 			clientSecret: process.env.GH_SECRET,
-			callbackURL: process.env.PRODICTION
+			callbackURL: process.env.PRODUCTION
 				? `https://mysterious-garden-46203.herokuapp.com/join${routes.githubCallback}`
 				: `http://localhost:4000${routes.githubCallback}`,
 			scope: 'user:email',
