@@ -8,7 +8,6 @@ import {
 	postLogin,
 	githubLogin,
 	postGithubLogin,
-	me,
 	facebookLogin,
 	postFacebookLogin,
 	userDetail,

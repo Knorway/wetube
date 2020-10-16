@@ -32,7 +32,7 @@ passport.use(
 		{
 			clientID: process.env.FB_ID,
 			clientSecret: process.env.FB_SECRET,
-			callbackURL: `https://b803238b3cf4.ngrok.io${routes.facebookCallback}`,
+			callbackURL: `https://mysterious-garden-46203.herokuapp.com${routes.facebookCallback}`,
 			profileFields: ['id', 'displayName', 'photos', 'email'],
 			scope: ['public_profile', 'email'],
 		},

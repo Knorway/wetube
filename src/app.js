@@ -8,6 +8,7 @@ import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import session from 'express-session';
 import mongoStore from 'connect-mongo';
+import flash from 'express-flash';
 import userRouter from './routers/userRouter';
 import videoRouter from './routers/videoRouter';
 import globalRouter from './routers/globalRouter';
@@ -41,6 +42,9 @@ app.use(
 		store: new CookieStore({ mongooseConnection: mongoose.connection }),
 	})
 );
+
+app.use(flash());
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -50,9 +54,5 @@ app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);
 app.use(routes.api, apiRouter);
-
-// app.get('/', (req, res) => {
-// 	res.j
-// })
 
 export default app;
