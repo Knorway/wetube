@@ -101,14 +101,18 @@ export const logout = (req, res) => {
 };
 
 export const me = (req, res) => {
+	const { user } = req;
 	res.render('userDetail', { pageTitle: 'User Detail', user: req.user });
+	console.log(user.videos[0]);
 };
 
 export const userDetail = async (req, res) => {
 	const { id } = req.params;
 	try {
 		const user = await User.findById(id).populate('videos');
-		console.log(user);
+		// console.log(user);
+		// console.log('****************');
+		// console.log(user.videos);
 		res.render('userDetail', { pageTitle: 'User Detail', user });
 	} catch (err) {
 		res.redirect(routes.home);
@@ -127,7 +131,7 @@ export const postEditProfile = async (req, res) => {
 		await User.findByIdAndUpdate(req.user.id, {
 			name,
 			email,
-			avatarUrl: file ? file.path : req.user.avatarUrl,
+			avatarUrl: file ? file.location : req.user.avatarUrl,
 		});
 		res.redirect(routes.me);
 	} catch (err) {

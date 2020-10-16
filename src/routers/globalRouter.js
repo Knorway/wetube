@@ -11,6 +11,7 @@ import {
 	me,
 	facebookLogin,
 	postFacebookLogin,
+	userDetail,
 } from '../controllers/userController';
 import { home, search } from '../controllers/videoController';
 import { onlyPrivate, onlyPublic } from '../middlewares';
@@ -42,6 +43,6 @@ globalRouter.get(routes.home, home);
 globalRouter.get(routes.search, search);
 globalRouter.get(routes.logout, onlyPrivate, logout);
 
-globalRouter.get(routes.me, me);
+globalRouter.get(routes.userDetail, userDetail);
 
 export default globalRouter;
