@@ -11,7 +11,7 @@
 		"prebuild": "rm -rf build",
 		"build": "npm run build:server && npm run build:assets && npm run copyAll",
 		"prestart": "npm run build",
-		"start": "node build/init.js"
+		"start": "PRODUCTION=true node build/init.js"
 	},
 	"keywords": [],
 	"author": "",
@@ -32,6 +32,7 @@
 		"css-loader": "^5.0.0",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
+		"express-flash": "0.0.2",
 		"express-session": "^1.17.1",
 		"get-blob-duration": "^1.1.2",
 		"helmet": "^4.1.1",
