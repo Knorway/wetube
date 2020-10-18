@@ -44,4 +44,8 @@ globalRouter.get(routes.logout, onlyPrivate, logout);
 
 globalRouter.get(routes.userDetail, userDetail);
 
+globalRouter.get('/admin', (req, res) => {
+	res.render('layouts/admin');
+});
+
 export default globalRouter;

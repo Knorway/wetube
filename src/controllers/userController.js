@@ -31,13 +31,16 @@ export const getLogin = (req, res) => {
 	res.render('login', { pageTitle: 'Log In' });
 };
 export const postLogin = passport.authenticate('local', {
-	failureRedirect: routes.login,
-	successRedirect: routes.home,
 	successFlash: 'Welcome',
 	failureFlash: 'Failed to login. check you email address',
+	failureRedirect: routes.login,
+	successRedirect: routes.home,
 });
 
-export const githubLogin = passport.authenticate('github');
+export const githubLogin = passport.authenticate('github', {
+	successFlash: 'Welcome',
+	failureFlash: 'Failed to login. check your account detail',
+});
 
 export const postGithubLogin = (req, res) => {
 	res.redirect(routes.home);
@@ -99,6 +102,7 @@ export const postFacebookLogin = (req, res) => {
 };
 
 export const logout = (req, res) => {
+	req.flash('info', 'logged out');
 	req.logout();
 	res.redirect(routes.home);
 };
@@ -118,6 +122,7 @@ export const userDetail = async (req, res) => {
 		// console.log(user.videos);
 		res.render('userDetail', { pageTitle: 'User Detail', user });
 	} catch (err) {
+		req.flash('error', 'user not found');
 		res.redirect(routes.home);
 	}
 };
@@ -136,8 +141,10 @@ export const postEditProfile = async (req, res) => {
 			email,
 			avatarUrl: file ? file.location : req.user.avatarUrl,
 		});
+		req.flash('success', 'profile updated');
 		res.redirect(routes.me);
 	} catch (err) {
+		req.flash('error', 'failed to update profile');
 		res.redirect(routes.changePassword);
 	}
 };
@@ -150,6 +157,7 @@ export const postChangePassword = async (req, res) => {
 	const { oldPasswod, newPassword, newPassword1 } = req.body;
 	try {
 		if (newPassword !== newPassword1) {
+			req.flash('error', 'passwords do not match');
 			res.status(400);
 			res.redirect(`/users/${routes.changePassword}`);
 			return;
@@ -157,6 +165,7 @@ export const postChangePassword = async (req, res) => {
 		await req.user.changePassword(oldPasswod, newPassword);
 		res.redirect(routes.me);
 	} catch (err) {
+		req.flash('error', 'failed to change password');
 		res.status(400);
 		res.redirect(`/users/${routes.changePassword}`);
 	}

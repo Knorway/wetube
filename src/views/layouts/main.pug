@@ -1,3 +1,5 @@
+include ../mixins/message
+
 doctype html
 html(lang="en")
     head
@@ -8,11 +10,25 @@ html(lang="en")
         link(rel="stylesheet", href="/static/main.css")
     body
         if messages.error
-            span=messages.error
-        if messages.success
-            span=messages.success
-        if messages.failure
-            span=messages.failure
+            +message({
+                type:'error',
+                text: messages.error,
+            })
+        else if messages.info
+            +message({
+                type:'info',
+                text:messages.info,
+            })
+        else if messages.success
+            +message({
+                type:'success',
+                text:messages.success,
+            })
+        else if messages.failure
+            +message({
+                type:'failure',
+                text:messages.failure,
+            })
         include ../partials/header
         main
             block content

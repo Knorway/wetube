@@ -120,7 +120,7 @@ export const postRegisterView = async (req, res) => {
 	} catch (err) {
 		res.status(400);
 	} finally {
-		res.end();
+		// res.end();
 	}
 };
 
